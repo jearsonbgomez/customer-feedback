@@ -12,3 +12,6 @@
 - Refactor API logic using `ApiResource` and `ResourceCollection` for cleaner and more standardized API responses.
 - Use https://ui.shadcn.com/ built in to laravel 12 for ui.
 - Implement automated testing (e.g., Feature and Unit tests) for improved reliability.
+
+## Project Preview
+[![3lTBuse.md.png](https://iili.io/3lTBuse.md.png)](https://freeimage.host/i/3lTBuse)
