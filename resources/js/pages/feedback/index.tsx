@@ -23,6 +23,14 @@ export default function Index() {
         rating: [],
     });
 
+    const [reactions] = useState<{ value: string; emoji: string }[]>([
+        { value: '1', emoji: '🥲' },
+        { value: '2', emoji: '😐' },
+        { value: '3', emoji: '🙂' },
+        { value: '4', emoji: '😄' },
+        { value: '5', emoji: '🤩' },
+    ]);
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const key = e.target.id;
         const value = e.target.value;
@@ -136,19 +144,30 @@ export default function Index() {
                             </div>
 
                             <div className="col-span-full">
-                                <select
-                                    id="rating"
-                                    value={data.rating}
-                                    onChange={(e) => changeValue('rating', e.target.value)}
-                                    className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                                >
-                                    <option value="">Select Rating</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
+                                <label htmlFor="reaction" className="mb-2 block text-sm/6 font-medium text-gray-900">
+                                    How happy are you with this app?
+                                </label>
+                                <div id="reaction" className="mb-4 flex gap-4 text-2xl">
+                                    {reactions.map((option) => (
+                                        <label key={option.value} className="cursor-pointer">
+                                            <input
+                                                type="radio"
+                                                name="rating"
+                                                value={option.value}
+                                                checked={data.rating === option.value}
+                                                onChange={(e) => changeValue('rating', e.target.value)}
+                                                className="hidden"
+                                            />
+                                            <span
+                                                className={`inline-block rounded-full p-2 transition ${
+                                                    data.rating === option.value ? 'scale-90 bg-yellow-400' : ''
+                                                }`}
+                                            >
+                                                {option.emoji}
+                                            </span>
+                                        </label>
+                                    ))}
+                                </div>
                                 {errors.rating && <InputError message={errors.rating[0]} />}
                             </div>
                             <div>
